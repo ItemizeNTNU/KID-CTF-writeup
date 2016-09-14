@@ -1,0 +1,20 @@
+Whats this
+
+
+
+
+
+In this task you are only given the hint:
+«my blt drive on my computer just went awol»
+
+
+A google-search will yield results where one is a short movie from the movie "Hackers" from 1995.
+
+If you watch the movie you will hear the IP of the target machine: '212.555.42.40'
+
+
+
+
+The flag would then be: 'ctf{212.555.42.40}'
+
+( just entering '212.555.42.40' is also an accepted answer )
