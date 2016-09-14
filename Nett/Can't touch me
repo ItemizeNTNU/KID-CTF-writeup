@@ -41,6 +41,7 @@ To trigger a submit-event you simply send a submit-function to the variable:
 	$form.submit()
 
 
+Will return the flag: ctf{I_hate_when_javascript_does_that}
 
 
 --
