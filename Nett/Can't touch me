@@ -1,0 +1,48 @@
+Can't touch me
+
+
+TASK:
+John has created a webpage, but something went wrong. Now he can't fetch the flag anymore. 
+
+Can you help him?
+
+http://shellshock.itemize.no:1431
+
+
+
+
+WRITEUP:
+The website shows a single button with the text 'Press me to activate the flag-fetching capability...'. If you press the button another button with the text 'Show flag' will appear. 
+
+The goal of the challenge is to push this button.
+
+If you move your mouse over the button, it moves. If you try to focus it, it disapears. 
+
+By viewing the sourcecode of the webpage you can see that the button has a unique id ('flag-fetcher'), and has a "form submit" action connected to the "onclick" attribute. It would be fair to say that submitting this form is our new more detailed goal.
+
+Submitting the form can be done in two ways;
+- Trigger a submit
+- Trigger a click
+
+Both can be done by using the browsers javascript console(Chrome: F12 and choose 'Console').
+
+
+Trigger a click:
+By reading the action()-function, the function which hides and show the 'Show flag' button, we can see how the button is referenced.
+
+To trigger a click-event you simply send a click-function to the reference:
+	document.getElementById('flag-fetcher').click()
+
+
+Trigger a submit:
+The variable $form holds the form we want to submit. 
+
+To trigger a submit-event you simply send a submit-function to the variable:
+	$form.submit()
+
+
+
+
+--
+Tormod Bjørnhaug
+tormod@itemize.no
