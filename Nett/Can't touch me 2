@@ -1,0 +1,48 @@
+Can't touch me 2
+
+
+TASK:
+This time, John's flag has childhood trauma and will not be touched by anyone; not even you!
+
+Maybe your javascripting skills can help him out?
+
+http://shellshock.itemize.no:3131
+
+
+
+
+WRITEUP:
+The website show a single button with the text 'you will never get this'. The goal is to activate this button. If you move your mouse to the button it moves. If you focus it, nothing happens. 
+
+By studying the information on the webpage it would be natural to think that we are trying to do a "mouseup" on the button.
+
+Using the console would be a good approach here.
+
+When viewing the sourcecode we can see that the code is garbeled up and makes no sense. We can how ever identify that there is a <button> tag.
+
+One approach to reference this button would be to iterate through 'document.body'`s childs:
+
+Input:	
+	document.body.firstChild.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling
+
+Output:	
+	<button encrypted="105-190-388-327-95-582-665-918-108-388-103-190-448-324-101-582-805-909-95-400-111-190-440-333-116-570-812-909-108-432">you will never get this</button>
+
+
+
+To make a mouseup-event in javascript we either need to create our own function(can be found though Google) or assign the commands to a simple variable, initialize it and dispatch the event to the <button>:
+
+	$event = document.createEvent('MouseEvents');
+	$event.initEvent('mouseup',true,true);
+	document.body.firstChild.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.dispatchEvent($event)
+
+This will provide a popup with the flag:
+
+ctf{i_am_a_flag_please_do_not_tell}
+
+( The flag 'i_am_a_flag_pleas_do_not_tell' is also accepted as a valid flag )
+
+
+--
+Tormod Bjørnhaug
+tormod@itemize.no
