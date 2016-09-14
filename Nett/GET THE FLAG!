@@ -1,0 +1,19 @@
+GET THE FLAG!
+
+TASK:
+John wants you to go and get the flag for him.
+
+(John is lazy. Don't be like John....)
+
+http://shellshock.itemize.no:4512
+
+
+
+
+WRITEUP:
+Simply change the GET value of 'get-flag' from 'no' to 'yes' in your browser address bar.
+
+
+--
+Tormod Bjørnhaug
+tormod@itemize.no
