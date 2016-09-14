@@ -1,0 +1,53 @@
+RSvAk
+
+Bob-Arne forsøkte seg på litt RSA-kryptografi, og nå har han mista flagget. Kan du hjelpe han?
+
+Her er parameterne vi klarte å få tak i:
+
+N=1578685644216181758761914640017584544594297529255315909782905668950077946686737738219972549645741
+C=1075754853990703618644812722503412469472929499241805473870510993803430043426137057092471945935409
+e = 65537
+
+
+----
+
+Writeup
+----
+
+In this task we are given three parameters of RSA. The modulus, N, the encrypted text, C (ciphertext), and the public exponent e. The goal will be to decrypt the ciphertext.
+
+
+Quick intro to RSA:
+(General case, 2 primes)
+Generate primes, p and q. The modulus is equal to the product of p and q.
+The ciphertext is now given by:
+C = M^e (mod N), where M is the message, e is the public exponent and N is the modulus.
+
+
+
+To decrypt it you generally need to factor the modulus, which is why RSA is so strong. With large numbers this is difficult, but as it is small in this case it is easy.
+
+Using factordb.com or yafu (or a similar tool/script) we can easily factor N into p and q.
+
+p = 15224813696476730777
+q = 103691623141603057071209959165496462731309347970011919027806966873027701761333
+
+
+To decrypt the ciphertext we need to find the secret exponent, d.
+d is the modular inverse of the public exponent mod the totient function of N.
+d*e (mod phi(N)) = 1
+
+We also have that
+phi(N) = (p-1)*(q-1)
+
+
+So if we calculate modular_inverse(e,phi) we get d. To get the original message (and flag) we simply multiply the ciphertext with itself d times modulo N.
+
+flag = C^d (mod N)
+
+=> flag = ctf{d0nt_l3t_y0ur_m3m3s_b3_dr34ms}
+
+
+--
+Simen Been
+s@haitech.org
