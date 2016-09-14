@@ -1,1 +1,5 @@
 
+Glidelås
+
+Er en zip-fil kombinert gjemt inni et bilde.
+Kan enkelt bli funnet ved å unzippe bildet og åpne flag.txt.
