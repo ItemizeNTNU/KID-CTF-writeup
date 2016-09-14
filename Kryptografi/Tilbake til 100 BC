@@ -1,0 +1,24 @@
+Tilbake til 100 BC
+
+Klarer du å løse dette super-avanserte chifferet?!
+
+Kryptert: pgs{pnrfne_re_yvgg_tnzzryqntf}
+
+(Bare små bokstaver)
+
+
+---
+
+Writeup
+---
+
+This is a simple Caesar-cipher with a rotation of 13-characters. This is easily noticed by the lack of encryption of the non-alphabetic characters ({ and _). The 13-char rotation can easily be found by trial-and-error/bruteforce.
+
+Decrypting it yields:
+
+ctf{caesar_er_litt_gammeldags}
+
+
+--
+Simen Been
+s@haitech.org
