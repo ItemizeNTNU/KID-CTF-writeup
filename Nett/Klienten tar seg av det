@@ -1,0 +1,24 @@
+Klienten tar seg av det:
+Klarer du å få tak i passordet?
+http://shellshock.itemize.no:6678/
+
+
+When first go to http://shellshock.itemize.no:6678, an alert pops up. 
+After entering pressing "ok" twice on the alert button. A picture of Inspector Gadget is displayed on the
+page. This is a clue... Right click anywhere on the page and press "Inspect" (or press F12). 
+
+You will see the sourcecode in the browsers developer tools.
+If you take a closer look at the head element, you should notice the <script></script> tags indicating javascript on the page.
+Inside the script there is a check and a variable "password". There is your flag.
+
+
+Klienten tar seg av det 2:
+Denne gangen har eieren av nettsiden oppdatert sikkerheten sin, men er det nok?
+http://shellshock.itemize.no:6679/
+
+Same procedure as klienten tar seg av det 1, only difference is the password is encoded. 
+If you enter developer tools -> console, and enter unescape(pass), you will see the flag.
+
+If you would like to read more about this kind of encoding (URL encoding), take a look at this website:
+http://www.w3schools.com/tags/ref_urlencode.asp
+
