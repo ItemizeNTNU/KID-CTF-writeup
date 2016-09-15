@@ -1,0 +1,27 @@
+Baserace!
+
+Ole-Jacob har drevet med diverse enkoding av ting. Han er på ferie nå, og vi vil ha flagget hans. Vi fant denne strengen:
+Y3Rme2ExMV95MHVyX2I0czNfNHIzX2JlbDBuZ190MF91c30=
+
+Kan du hjelpe oss?
+
+
+---
+
+Writeup
+---
+
+
+The title as well as the description suggest heavily that there is some sort of base-encoding. As we have large letters, small letters, numbers and an ending equal-sign it highly suggests being base64.
+
+Running the following command on a UNIX-based system (with base64 installed) gets the flag:
+
+echo Y3Rme2ExMV95MHVyX2I0czNfNHIzX2JlbDBuZ190MF91c30= | base64 -d
+>> ctf{a11_y0ur_b4s3_4r3_bel0ng_t0_us}
+
+
+Or you could just use a webbased service, a browser addon, pythons base64 library etc.
+
+--
+Simen Been
+s@haitech.org
