@@ -3,7 +3,7 @@
 We start by finding out how the encryption work. If we use a string of only a's we find that the encryption varies between three letters. We find the same if we use a string of only b's. Only this time the letters are one further down the alphabet than for a. It seems like three static rots are cycled. If we test the string ab, we find that we get the first letter from the string of only a's and the first from the string of only b's. So the step of the cycle must be counted separately for each letter in the alphabet. Using this information we can write the following python script which finds all possible decryptions of the flag.
 
 ```python
-encrypted_flag = "wnz{sIO_msAiS_wgUlX_qeCvY}"
+encrypted_flag = "wnz{gSofyX_lIXm_uvI_wsAis_joH}"
 unencrypted_flag = "ctf{"
 rot1, rot2, rot3 = 20, 4, 12
 used = {'c':1, 't':1, 'f':1}
@@ -42,4 +42,4 @@ if __name__ == "__main__":
 	solveR(dict(used), 4, unencrypted_flag)
 ```
 
-By running the code we get a bunch of potential flags, as the encryption is not one-to-one. Only one flag seems to be right, that is the flag ctf{yOU_soOoO_smArT_maYbE}
+By running the code we get a bunch of potential flags, as the encryption is not one-to-one. Only one flag seems to be right, that is the flag ctf{cYcleD_rOTs_arE_soOoo_fuN}
