@@ -1,0 +1,49 @@
+Kabelhai 2: Judgement day
+
+Skurkene blir bare bedre og bedre, og våre analytikere spiser pizzaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa! Kan du finne ut av dette?
+
+
+---
+
+Writeup
+---
+
+
+In this challenge we are given a pcap-file. Opening it up and taking a look at the TCP-streams yields a conversation between our two perps, t0rv4lds4dw1n and 3v1lh4x0r.
+
+The essential to extract from this pcap is the following:
+
+"This next secret is encoded with base64 and encrypted."
+"Some awesome XOR-crypting."
+"aaaaaaaaaaaaaaaaalright."
+"Here: AhUHGhlREz4EEz4GVQ8SClI+BA1SDwUIBj4FVRw="
+
+
+Meaning we are given a base64-encoded string that has been XOR-ed by a value. Seeing as both the task-description and the conversation include tons of exaggerated a's, there is reasons to suspect this might have something to do with the key.
+
+Given some trial and error, one should find that the key is infact 'a' (97).	
+
+Which is easily decoded and decrypted by a couple lines in python.
+
+
+#!/usr/bin/python
+from base64 import b64decode
+from itertools import izip, cycle
+
+challenge_string = "AhUHGhlREz4EEz4GVQ8SClI+BA1SDwUIBj4FVRw="
+
+def decrypt_xor(string,key):
+	return ''.join(chr(ord(a)^ord(b)) for a,b in izip(string,cycle(key)))
+
+
+raw_str = b64decode(challenge_string)
+
+flag = decrypt_xor(raw_str,'a')
+
+print "Flagget er: {}\n".format(flag)
+
+
+
+--
+Simen Been
+s@haitech.org
