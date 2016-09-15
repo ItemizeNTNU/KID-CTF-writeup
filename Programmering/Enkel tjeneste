@@ -1,0 +1,86 @@
+Enkel tjeneste
+
+Det kjører en tjeneste på shellshock.itemize.no:1337. Klarer du å få tak i flagget?
+
+HINT ta en titt på NETCAT
+
+
+---
+
+Writeup
+---
+
+
+The description tells us to connect to a service hosted on a server.
+
+Connecting to the host:port combination yields the following:
+
+"Velkommen! Løs alt og få et flagg!
+Klarer du å dekode dette?: b3YxS1g0cTJCNGtPOHBD"
+
+Which is a base64-encoded random string (ref: Kryptografi/Baserace!).
+
+Returned the decoded string yields another task:
+
+"Gi meg en streng på lenge 15 som starter med 0zJKJ og hvis SHA1-hashsum slutter med aaaa!"
+
+Which is a simple bruteforce.
+
+Anyway, I think the most illustrating way to demonstrate is to show a solution written in python.
+
+Note: I used Pwntools, a Python-library special made for solving CTFs.
+
+
+#!/usr/bin/python
+from pwn import *
+import base64, random, string, re
+from hashlib import sha1
+
+
+def genstr(N):
+	return ''.join(random.choice(string.ascii_uppercase+string.ascii_lowercase+string.digits) for _ in range(N))
+
+
+def brutesha1(start):
+	kand = ''
+	while True:
+		kandidat = start+genstr(10)
+		hashed = sha1(kandidat).hexdigest()
+		if hashed.endswith('aaaa'):
+			print "[*] Fant kandidat: {}".format(kandidat)
+			return kandidat
+
+
+
+#Setup connection
+r = remote('shellshock.itemize.no',1337)
+
+print r.recvuntil('Klarer du å dekode dette?: ')
+
+enc = r.recv(1024)
+print "[*] Mottat enc: {}".format(enc)
+
+dec = base64.b64decode(enc)
+print "[*] Sender dekodet: {}".format(dec)
+
+r.send(dec+'\n') #Need newline to "enter" our answer.
+
+challenge2 = r.recv(4096)
+
+match = re.match( r'Gi meg en streng på lenge \d{1,} som starter med (.*) og hvis SHA1-hashsum slutter med (.*)!',challenge2,re.M|re.I)
+
+print challenge2
+
+start = match.group(1)
+answer = brutesha1(start)
+
+r.send(answer+'\n')
+
+print r.recv(4096)
+
+r.close()
+
+
+--
+Simen Been
+s@haitech.org
