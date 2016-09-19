@@ -1,3 +1,5 @@
+###Kakemonster!
+
 Oppgaven heter kakemoster, ofte i sammenheng med tilgangskontroll bruker man cookies.
 Det er snakk om tilgang til et admin panel, og om man inspiserer småkakene på siden ser man at at man har en sha256-hash cookie.
 
@@ -16,3 +18,7 @@ Det gir oss følgende på http://shellshock.itemize.no:8008/admin
 
 
 Som er en referanse til filmen WarGames. Kan anbefales!
+
+
+--Anders Been Wilhelmsen
+been.anders@gmail.com
