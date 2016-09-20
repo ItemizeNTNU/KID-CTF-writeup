@@ -1,0 +1,17 @@
+Captcha
+
+Noen ganger kan captcha være veldig slem, spesielt når det gjemmer noe...
+
+---
+
+Writeup
+---
+
+You are given a pcap-file. When you look at it, it shows a simple download from i.imgsafe.com. 
+When you do a HTTP export, you find a .PNG file. The picture is malformed, giving you information that there might be something hidden in the picture.
+Doing a simple strings on the file gives you the flag. When knowing the flag is on the form ctf{ascii}:
+
+root@kali:~# strings 5428e8a9eb.png | grep 'ctf'
+ctf{st3n0graph7_1s_eaSy}
+
+Then we have the flag.
